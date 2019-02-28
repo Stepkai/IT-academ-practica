@@ -50,13 +50,19 @@ class TasksController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'title' => 'required', //обязательный ввод, валидация
-            'description' => 'required'
-        ]);
         $myTask = Task::find($id);
-        $myTask->fill($request->all());
-        $myTask->save();
+        if ($myTask instanceof Task){
+            $this->validate($request, [
+                'title' => 'required', //обязательный ввод, валидация
+                'description' => 'required'
+            ]);
+
+            $myTask->fill($request->all());
+            $myTask->save();
+            return $myTask;
+        } else {
+            return response()->json(['errors' => ['Reservation not found']], 404);
+        }
 
         return response()->json([$request->all()]);
 //        return redirect()->route('tasks.index');
