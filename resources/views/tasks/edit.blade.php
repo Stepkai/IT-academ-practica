@@ -18,7 +18,7 @@
                     <input type="text" class="form-control" name="title" value="{{$task->title}}">
                     <br>
                     <textarea name="description" id="" cols="30" rows="10" class="form-control">
-                        {{$task->descrition}}
+                        {{$task->description}}
                     </textarea>
                     <br>
                     <button class="btn btn-succes">Submit</button>

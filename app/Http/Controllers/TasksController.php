@@ -15,7 +15,9 @@ class TasksController extends Controller
 
         $tasks = Task::all();
 
-        return view('tasks.index', ['tasks'=>$tasks]);
+        return response()->json([$tasks->all()]);
+
+       // return view('tasks.index', ['tasks'=>$tasks]);
     }
     public function create(){
         return view('tasks.create');
@@ -30,11 +32,14 @@ class TasksController extends Controller
         $task = new Task;
 //        $task->title = $request->get('title');
 //        $task->description = $request->get('description');
-        $task->fill($request->all());
+        $task->fill($request->all()); //метод fill перед данные из запроса и подставляет в нужные поля
+
 
         $task->save();
 
-        return redirect()->route('tasks.index');
+        return response()->json([$request->all()]);
+
+//        return redirect()->route('tasks.index'); //возврат на главную страницу
     }
 
     public function edit($id){
@@ -53,12 +58,13 @@ class TasksController extends Controller
         $myTask->fill($request->all());
         $myTask->save();
 
-        return redirect()->route('tasks.index');
+        return response()->json([$request->all()]);
+//        return redirect()->route('tasks.index');
     }
 
     public function show($id)
     {
-        $myTask = Task::find($id);
+        $myTask = Task::findOrFail($id);
 
         return view('tasks.show', ['task'=>$myTask]);
 
@@ -66,7 +72,10 @@ class TasksController extends Controller
 
     public function destroy($id)
     {
+
         Task::find($id)->delete();
+
+
 
         return redirect()->route('tasks.index');
 }

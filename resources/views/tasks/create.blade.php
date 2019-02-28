@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-md-12">
                 {!! Form::open(['route' => ['tasks.store']]) !!}
-
+                {{ csrf_field() }}
 
                 <div class="form-group">
                     <i>Имя</i>
