@@ -33,8 +33,6 @@ class TasksController extends Controller
 //        $task->title = $request->get('title');
 //        $task->description = $request->get('description');
         $task->fill($request->all()); //метод fill перед данные из запроса и подставляет в нужные поля
-
-
         $task->save();
 
         return response()->json([$request->all()]);
@@ -44,8 +42,12 @@ class TasksController extends Controller
 
     public function edit($id){
         $myTask = Task::find($id);
-
-        return view('tasks.edit', ['task' => $myTask]);
+        if ($myTask instanceof Task){
+            return response()->json([$myTask]);
+        } else {
+            return response()->json(['errors' => ['Net takogo']], 404);
+        }
+        //return view('tasks.edit', ['task' => $myTask]);
     }
 
     public function update(Request $request, $id)
@@ -78,10 +80,13 @@ class TasksController extends Controller
 
     public function destroy($id)
     {
+        $id  = Task::find($id);
+        if ($id instanceof Task){
+            $id->delete();
 
-        Task::find($id)->delete();
-
-
+        } else {
+            return response()->json(['errors' => ['Net takoi task']], 404);
+        }
 
         return redirect()->route('tasks.index');
 }
