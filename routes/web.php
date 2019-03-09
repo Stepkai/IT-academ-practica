@@ -25,4 +25,7 @@ Route::get('tasks/show/{id}', 'TasksController@show')->name('tasks.show'); //п�
 
 Route::delete('tasks/destroy/{id}', 'TasksController@destroy')->name('tasks.destroy');
 
+// Запустить парсер. Секретный токен нужен для запуска парсера через cron.
+Route::get('tasks/parser', 'TasksController@parser')->name('parser.start');
+
 //Route::resource('tasks', 'TasksController'); // метод resource сам определит маршрут
