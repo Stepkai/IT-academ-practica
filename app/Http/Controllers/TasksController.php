@@ -1,8 +1,8 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
-use App\Parser;
 use App\Task;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Validation\ValidatesRequests; //для валидации
@@ -92,24 +92,6 @@ class TasksController extends Controller
         return redirect()->route('tasks.index');
 }
 
-    public function parser (){
 
-//        $parser = new Parser;
-//        // Получать анализируемые ссылки;
-//        $parseredLinks = ParserLog::whereParserId($parser->id)->select('parsered_indexes')->get();
-//
-//        $parserClass = new ParserClass();
-//
-//        // Сделай парсинг сайтов из БД. Получите данные анализа.
-//        $parserData = $parserClass->parserData($parser, $parseredLinks);
-//        return response()->json([$parser->all()]);
-
-        $link = new Parser();
-        $myParser = Parser::findOrFail($link);
-
-        return view('tasks.parser', ['parser'=>$myParser]);
-
-        return view('tasks.parser');
-    }
 
 }

@@ -8,11 +8,10 @@
 
 namespace App;
 
-
 use Illuminate\Database\Eloquent\Model;
 
 class Parser extends Model
 {
-    protected $fillable = ['link', 'title', 'body'];
+    protected $fillable = ['title', 'img', 'date', 'stoimost'];
     //создаем в модели массив в котором перечислены все атрибуты массового заполнения
 }
